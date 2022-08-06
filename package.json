@@ -1,0 +1,24 @@
+{
+  "name": "onboarding",
+  "version": "0.0.1",
+  "description": "On-boarding bot for discord",
+  "main": "./prod/index.js",
+  "author": "Teekay",
+  "scripts": {
+    "build": "tsc",
+    "start": "tsc && node -r dotenv/config ./prod/index.js"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "@discordjs/builders": "^1.1.0",
+    "@discordjs/rest": "^1.0.1",
+    "discord-api-types": "^0.37.1",
+    "discord.js": "^14.1.2",
+    "dotenv": "^16.0.1",
+    "mongoose": "^6.5.1"
+  },
+  "devDependencies": {
+    "@types/node": "^18.6.4",
+    "typescript": "^4.7.4"
+  }
+}
