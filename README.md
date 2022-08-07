@@ -29,4 +29,13 @@ APPLICATION_ID="Application ID of Discord Application"
 GUILD_ID="Channel ID that can be found in Discord Settings Tab. Developer setting must be on in your personal settings"
 ```
 
-Use it!
+### Run
+- `yarn install`
+- for build, `yarn build`, or just `yarn start`
+
+### GCP with Github Action
+- Enable `Artifact Registry API` `Cloud Run API`
+- Create Service Account with `Cloud Run Service Agent` role
+- Create Key (JSON) and put it as credential at github repo settings. Then name it 'GCP_SA_KEY`
+- IAM > Add roles for principle: `Artifact Registry Administrator` `Cloud Run Admin` `Cloud Run Service Agent`
+- 
