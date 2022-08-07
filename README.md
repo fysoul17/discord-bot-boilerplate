@@ -36,6 +36,5 @@ GUILD_ID="Channel ID that can be found in Discord Settings Tab. Developer settin
 ### GCP with Github Action
 - Enable `Artifact Registry API` `Cloud Run API`
 - Create Service Account with `Cloud Run Service Agent` role
-- Create Key (JSON) and put it as credential at github repo settings. Then name it 'GCP_SA_KEY`
-- IAM > Add roles for principle: `Artifact Registry Administrator` `Cloud Run Admin` `Cloud Run Service Agent`
-- 
+- Create Key (JSON) and make it as Secret(Action) at github repo settings. Then name it `GCP_SA_KEY`
+- IAM > Add roles for the service account: `Artifact Registry Administrator` `Cloud Run Admin`
