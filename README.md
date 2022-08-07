@@ -15,6 +15,7 @@
 
 ### Create MongoDB
 - Create any MongoDB atlas
+- Make sure to whitelist the Cloud Run IP
 
 ### Environment Values
 - Create .env file
