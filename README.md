@@ -28,6 +28,7 @@ MONGO_PASSWORD="MongoDB Password"
 APPLICATION_ID="Application ID of Discord Application"
 GUILD_ID="Channel ID that can be found in Discord Settings Tab. Developer setting must be on in your personal settings"
 ```
+- remove from .gitignore if it needs to be run on cloud
 
 ### Run
 - `yarn install`
