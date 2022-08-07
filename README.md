@@ -35,7 +35,7 @@ GUILD_ID="Channel ID that can be found in Discord Settings Tab. Developer settin
 - `yarn install`
 - for build, `yarn build`, or just `yarn start`
 
-### GCP with Github Action
+### GCP with Github Action (Option - Est. Minimum cost: $50/Month)
 - IMPORTANT: You MUST enable "Always-On" CPU allocation to use this method, because Discord bot does not start HTTP server that listens on an HTTP port (8080)
 - Enable `Artifact Registry API` `Cloud Run API`
 - Create Service Account with `Cloud Run Service Agent` role
