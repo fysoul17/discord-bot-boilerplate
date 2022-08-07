@@ -20,7 +20,7 @@
 - Create .env file
 - Copy and Paste, then fill variables
 ```
-BOT_TOKEN="MTAwNTM4MzU1NjYwNTkzNTY3Ng.GTPvG_.rRrAFb-kM5E1njU7M_ecNxm5WiH2-Pf_dL5rus"
+BOT_TOKEN="Bot Token ID"
 
 MONGO_CLUSTER="mongodb+srv://<username>:<password>@(URL of MongoDB Cluster)"
 MONGO_USER="MongoDB Username"
