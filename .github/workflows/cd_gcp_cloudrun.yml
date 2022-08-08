@@ -1,0 +1,55 @@
+# name: Production CD
+
+# on:
+#   push:
+#     branches: [main]
+
+# env:
+#   PROJECT_ID: <PUT YOUR GCP PROJECT ID>
+#   CLOUD_RUN_NAME: <PUT YOUR DESIRED CLOUD RUN NAME>
+#   # https://cloud.google.com/compute/docs/regions-zones
+#   GCP_REGION: <PUT YOUR DESIRED REGION IN GCP>
+
+# jobs:
+#   publish-to-gcp:
+#     name: Publish to Artifact Registry and Cloud Run
+#     runs-on: ubuntu-latest
+#     environment: production
+
+#     steps:
+#       - name: Checkout
+#         uses: actions/checkout@v2
+
+#       # Set credential for Docker
+#       - uses: google-github-actions/setup-gcloud@v0.2.0
+#         with:
+#           service_account_key: ${{ secrets.GCP_SA_KEY }}
+#           project_id: ${{ env.PROJECT_ID }}
+
+#       - run: |-
+#           gcloud --quiet auth configure-docker ${{ env.GCP_REGION }}-docker.pkg.dev
+
+#       # Build the Docker image
+#       - name: Build
+#         run: |
+#           docker build -t "$GCP_REGION-docker.pkg.dev/$PROJECT_ID/$CLOUD_RUN_NAME/main:latest" .
+
+#       # Push the Docker image to Google Container Registry
+#       - name: Push to Artifact Registry
+#         run: |
+#           docker push "$GCP_REGION-docker.pkg.dev/$PROJECT_ID/$CLOUD_RUN_NAME/main:latest"
+
+#       # Set credential for Cloud Run
+#       - id: "auth"
+#         uses: "google-github-actions/auth@v0"
+#         with:
+#           credentials_json: ${{ secrets.GCP_SA_KEY }}
+
+#       # Deploy to Cloud Run
+#       - name: Deploy to Cloud Run
+#         id: deploy
+#         uses: google-github-actions/deploy-cloudrun@main
+#         with:
+#           service: ${{ env.CLOUD_RUN_NAME }}
+#           region: ${{ env.GCP_REGION }}
+#           image: ${{ env.GCP_REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.CLOUD_RUN_NAME }}/main:latest
