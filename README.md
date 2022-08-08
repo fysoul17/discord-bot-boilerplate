@@ -15,6 +15,7 @@
 
 ### Create MongoDB
 - Create any MongoDB atlas
+- Make sure to whitelist the Cloud Run IP
 
 ### Environment Values
 - Create .env file
@@ -28,14 +29,17 @@ MONGO_PASSWORD="MongoDB Password"
 APPLICATION_ID="Application ID of Discord Application"
 GUILD_ID="Channel ID that can be found in Discord Settings Tab. Developer setting must be on in your personal settings"
 ```
+- remove from .gitignore if it needs to be run on cloud
 
 ### Run
 - `yarn install`
 - for build, `yarn build`, or just `yarn start`
 
-### GCP with Github Action
+### GCP with Github Action (Option - Est. Minimum cost: $50/Month)
+- IMPORTANT: You MUST enable "Always-On" CPU allocation to use this method, because Discord bot does not start HTTP server that listens on an HTTP port (8080)
 - Enable `Artifact Registry API` `Cloud Run API`
 - Create Service Account with `Cloud Run Service Agent` role
 - Create Key (JSON) and make it as Secret(Action) at github repo settings. Then name it `GCP_SA_KEY`
 - IAM > Add roles for the service account: `Artifact Registry Administrator` `Cloud Run Admin`
 - Edit `cd_production.yml` for Continuous Deployment. Replace `PROJECT_ID` `CLOUD_RUN_NAME` `GCP_REGION`
+- Create `Repository` of Artifact Registry and name it as `CLOUD_RUN_NAME` value and select region that matches to `GCP_REGION` value.
