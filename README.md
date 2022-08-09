@@ -43,3 +43,16 @@ GUILD_ID="Channel ID that can be found in Discord Settings Tab. Developer settin
 - IAM > Add roles for the service account: `Artifact Registry Administrator` `Cloud Run Admin`
 - Edit `cd_production.yml` for Continuous Deployment. Replace `PROJECT_ID` `CLOUD_RUN_NAME` `GCP_REGION`
 - Create `Repository` of Artifact Registry and name it as `CLOUD_RUN_NAME` value and select region that matches to `GCP_REGION` value.
+
+### Digital Ocean Droplet with Github Action (Option - Est. Minimum cost: $4~$10/Month)
+- Create Container Registery (free version might work, but 5G is recommended as garbage collector will take the space)
+- Create Droplet with SSH Authentication option
+- Connect to Droplet console, then create ssh key using below commands ([More info](https://github.com/appleboy/ssh-action))  
+  `ssh-keygen -t ed25519 -a 200 -C "your@email.com"`  
+  `cat .ssh/id_ed25519.pub > .ssh/authorized_keys` and copy this text into `Settings > Security tab > add SSH Key` on the left down corner at DO dashboard.  
+  `cat .ssh/id_ed25519` and copy the text as github secret `SSHKEY`  
+- Create github secrets  
+  `HOST` is droplet ip  
+  `DIGITALOCEAN_ACCESS_TOKEN` can be created at `API` menu of DO dashboard  
+  `PASSPHRASE` is what you entered as passphrase for ssh creation  
+  `USERNAME` is droplet username. usually `root`  
