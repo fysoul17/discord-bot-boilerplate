@@ -61,4 +61,6 @@ GUILD_ID="Channel ID that can be found in Discord Settings Tab. Developer settin
   `DIGITALOCEAN_ACCESS_TOKEN` can be created at `API` menu of DO dashboard  
   `PASSPHRASE` is what you entered as passphrase for ssh creation  
   `USERNAME` is droplet username. usually `root`  
+- Change env values in `yml` file  
+- Copy / Paste any `.env` into the Droplet  
 - NOTE: Setting env file needs some efforts than GCP.  
