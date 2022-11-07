@@ -35,7 +35,7 @@ GUILD_ID="Channel ID that can be found in Discord Settings Tab. Developer settin
 - `yarn install`
 - for build, `yarn build`, or just `yarn start`
 
-### GCP with Github Action (Option - Est. Minimum cost: $50/Month)
+### GCP with Cloud Run using Github Action (Option - Est. Minimum cost: $50/Month)
 - IMPORTANT: You MUST enable "Always-On" CPU allocation to use this method, because Discord bot does not start HTTP server that listens on an HTTP port (8080)
 - Enable `Artifact Registry API` `Cloud Run API`
 - Create Service Account with `Cloud Run Service Agent` role
@@ -44,6 +44,11 @@ GUILD_ID="Channel ID that can be found in Discord Settings Tab. Developer settin
 - Edit `cd_production.yml` for Continuous Deployment. Replace `PROJECT_ID` `CLOUD_RUN_NAME` `GCP_REGION`
 - Create `Repository` of Artifact Registry and name it as `CLOUD_RUN_NAME` value and select region that matches to `GCP_REGION` value.
 
+### GCP with Compute Engine using Github Action (Option - Est. Minimum cost: $0~$1/Month)
+- IMPORTANT: You MUST create `Cloud Storage` in order to use terraform setting and MUST match `bucket` and `prefix` at `main.tf`  
+- Follow above `Cloud Run` settings to create credential file for `GCP_SERVICE_ACCOUNT` secret.  
+- Edit `cd_gcp_ce_terraform.yml` for Continuous Deployment. Replace variables.
+  
 ### Digital Ocean Droplet with Github Action (Option - Est. Minimum cost: $4~$10/Month)
 - Create Container Registery (free version might work, but 5G is recommended as garbage collector will take the space)
 - Create Droplet with SSH Authentication option
@@ -56,3 +61,4 @@ GUILD_ID="Channel ID that can be found in Discord Settings Tab. Developer settin
   `DIGITALOCEAN_ACCESS_TOKEN` can be created at `API` menu of DO dashboard  
   `PASSPHRASE` is what you entered as passphrase for ssh creation  
   `USERNAME` is droplet username. usually `root`  
+- NOTE: Setting env file needs some efforts than GCP.  

@@ -1,0 +1,90 @@
+# name: Container Build Versioned
+
+# on:
+#   push:
+#     tags:
+#       - "v*.*.*"
+
+# env:
+#   PROJECT_ID: <PUT YOUR GCP PROJECT ID> # Must match with GCP and Terraform settings
+#   GITHUB_SHA: ${{ github.sha }}
+#   GITHUB_REF: ${{ github.ref }}
+#   # https://cloud.google.com/compute/docs/regions-zones
+#   INSTANCE_REGION: <PUT YOUR DESIRED REGION IN GCP>
+#   INSTANCE_NAME: <PUT YOUR DESIRED COMPUTE ENGINE NAME> # Must match with Terraform settings
+#   INSTANCE_ZONE: <PUT YOUR DESIRED ZONE IN GCP> # Must match with Terraform settings
+#   REGISTRY_PATH: <PUT YOUR DESIRED REGISTRY PATH>
+
+# jobs:
+#   terraform:
+#     name: Create or Update Compute Engine with Terraform
+#     runs-on: ubuntu-latest
+
+#     steps:
+#       - name: Checkout
+#         uses: actions/checkout@v2
+
+#       - name: Setup Terraform
+#         uses: hashicorp/setup-terraform@v1
+
+#       # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
+#       - name: Terraform Init
+#         run: terraform init
+#         env:
+#           GOOGLE_CREDENTIALS: ${{ secrets.GCP_SERVICE_ACCOUNT }}
+
+#       # Checks that all Terraform configuration files adhere to a canonical format
+#       - name: Terraform Format
+#         run: terraform fmt
+
+#       # Generates an execution plan for Terraform
+#       - name: Terraform Plan
+#         run: terraform plan
+#         env:
+#           GOOGLE_CREDENTIALS: ${{ secrets.GCP_SERVICE_ACCOUNT }}
+
+#         # On push to main, build or change infrastructure according to Terraform configuration files
+#         # Note: It is recommended to set up a required "strict" status check in your repository for "Terraform Cloud". See the documentation on "strict" required status checks for more information: https://help.github.com/en/github/administering-a-repository/types-of-required-status-checks
+#       - name: Terraform Apply
+#         run: terraform apply -auto-approve
+#         env:
+#           GOOGLE_CREDENTIALS: ${{ secrets.GCP_SERVICE_ACCOUNT }}
+
+#   publish-to-gcp:
+#     name: Publish to Artifact Registry and Cloud Run
+#     runs-on: ubuntu-latest
+#     environment: production
+#     needs: [terraform]
+#     if: needs.terraform.result == 'success'
+
+#     steps:
+#       - name: Checkout
+#         uses: actions/checkout@v2
+
+#       - uses: google-github-actions/setup-gcloud@v0.2.0
+#         with:
+#           service_account_key: ${{ secrets.GCP_SERVICE_ACCOUNT }}
+#           project_id: altverse-dev
+
+#       - name: Set env
+#         run: echo "TAG=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
+
+#       - run: |-
+#           gcloud --quiet auth configure-docker ${{ env.INSTANCE_REGION }}-docker.pkg.dev
+
+#       # Build the Docker image
+#       - name: Build
+#         run: |
+#           docker build -f Dockerfile -t  "$INSTANCE_REGION-docker.pkg.dev/$PROJECT_ID/$REGISTRY_PATH:$TAG" .
+
+#       # Push the Docker image to Google Container Registry
+#       - name: Push to Artifact Registry
+#         run: |
+#           docker push "$INSTANCE_REGION-docker.pkg.dev/$PROJECT_ID/$REGISTRY_PATH:$TAG"
+
+#       # Deploy to Compute Engine
+#       - name: Deploy
+#         run: |-
+#           gcloud compute instances update-container "$INSTANCE_NAME" \
+#             --zone "$INSTANCE_ZONE" \
+#             --container-image "$INSTANCE_REGION-docker.pkg.dev/$PROJECT_ID/$REGISTRY_PATH:$TAG"
