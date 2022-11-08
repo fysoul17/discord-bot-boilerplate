@@ -44,10 +44,13 @@ GUILD_ID="Channel ID that can be found in Discord Settings Tab. Developer settin
 - Edit `cd_production.yml` for Continuous Deployment. Replace `PROJECT_ID` `CLOUD_RUN_NAME` `GCP_REGION`
 - Create `Repository` of Artifact Registry and name it as `CLOUD_RUN_NAME` value and select region that matches to `GCP_REGION` value.
 
-### GCP with Compute Engine using Github Action (Option - Est. Minimum cost: $0~$1/Month)
-- IMPORTANT: You MUST create `Cloud Storage` in order to use terraform setting and MUST match `bucket` and `prefix` at `main.tf`  
-- Follow above `Cloud Run` settings to create credential file for `GCP_SERVICE_ACCOUNT` secret.  
+### GCP with Compute Engine using Github Action (Option - Est. Minimum cost: $7~/Month)
+- ~~IMPORTANT: You MUST create `Cloud Storage` in order to use terraform setting and MUST match `bucket` and `prefix` at `main.tf`~~
+- Follow above `Cloud Run` settings to create credential file for `GCP_SERVICE_ACCOUNT` secret.
+- Follow above `Artifact Registry` setting.
 - Edit `cd_gcp_ce_terraform.yml` for Continuous Deployment. Replace variables.
+- Create `Compute Engine` in GCP
+- Set Docker option
   
 ### Digital Ocean Droplet with Github Action (Option - Est. Minimum cost: $4~$10/Month)
 - Create Container Registery (free version might work, but 5G is recommended as garbage collector will take the space)
