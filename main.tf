@@ -21,14 +21,39 @@
 # #   }
 # # }
 
+# module "gce-container" {
+#   # https://github.com/terraform-google-modules/terraform-google-container-vm
+#   source  = "terraform-google-modules/container-vm/google"
+#   version = "3.1.0"
+
+#   container = {
+#     image = <PUT YOUR DOCKER IMAGE LOCATION>
+#     env = [
+#     { name  = "NODE_ENV"
+#         value = "production"
+#     }
+#     # BOT_TOKEN: TBA in console.
+#     ],
+#     securityContext = {
+#     privileged : true
+#     }
+#     tty : false
+# }
+
+# restart_policy = "Always"
+# }
+
 # resource "google_compute_instance" "bot-server" {
 #   depends_on   = [google_storage_bucket.terraform_state]
 #   name         = <PUT YOUR DESIRED COMPUTE ENGINE NAME>
 #   machine_type = "e2-small"
-
+# metadata = {
+#     gce-container-declaration = module.gce-container.metadata_value
+#     google-logging-enabled    = "true"
+# }
 #   boot_disk {
 #     initialize_params {
-#       image = "ubuntu-os-cloud/ubuntu-minimal-1804-lts"
+#       image = "cos-cloud/cos-stable"
 #       size  = "10"
 #       type  = "pd-ssd"
 #     }
