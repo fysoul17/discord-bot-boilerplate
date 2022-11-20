@@ -1,4 +1,5 @@
-import { ICommand } from "../interfaces/Command";
-import { mintCommand } from "../interfaces/mintCommand";
+import { ICommand } from "./Command";
+import { mintCommand } from "./token/mintTokenCommand";
+import { sendTokenCommand } from "./token/sendTokenCommand";
 
-export const CommandList: ICommand[] = [mintCommand];
+export const CommandList: ICommand[] = [mintCommand, sendTokenCommand];

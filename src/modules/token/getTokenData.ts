@@ -1,5 +1,5 @@
-import TokenModel from "../database/models/Token";
-import { IToken } from "../database/models/Token";
+import TokenModel from "../../database/models/Token";
+import { IToken } from "../../database/models/Token";
 
 export const getTokenData = async (id: string): Promise<IToken> => {
   const tokenData =

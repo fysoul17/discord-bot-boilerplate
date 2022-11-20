@@ -1,4 +1,4 @@
-import { IToken } from "../database/models/Token";
+import { IToken } from "../../database/models/Token";
 
 export const mintToken = async (token: IToken, amount: number) => {
   if (amount > 0) {
