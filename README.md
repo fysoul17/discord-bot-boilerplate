@@ -28,6 +28,7 @@ MONGO_USER="MongoDB Username"
 MONGO_PASSWORD="MongoDB Password"
 APPLICATION_ID="Application ID of Discord Application"
 GUILD_ID="Channel ID that can be found in Discord Settings Tab. Developer setting must be on in your personal settings"
+DISCORD_CHANNEL_ID_MAIN="Channel ID that the bot will send a message"
 ```
 - remove from .gitignore if it needs to be run on cloud
 
