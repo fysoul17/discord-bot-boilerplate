@@ -8,12 +8,10 @@ export const wait = async (ms: number) => {
 
 export enum ChannelName {
   Main,
-  Rewards,
 }
 
 const channels: Record<ChannelName, string> = {
   [ChannelName.Main]: process.env.DISCORD_CHANNEL_ID_MAIN!,
-  [ChannelName.Rewards]: "",
 };
 
 export const sendMessageToTextChannel = ({ channelName, message }: { channelName: ChannelName; message: string | MessagePayload | MessageCreateOptions }): Promise<Message<boolean>> => {
