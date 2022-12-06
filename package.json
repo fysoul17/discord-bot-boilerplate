@@ -1,7 +1,7 @@
 {
-  "name": "onboarding",
+  "name": "boilerplate",
   "version": "0.0.1",
-  "description": "On-boarding bot for discord",
+  "description": "Bot boilerplate for discord",
   "main": "./prod/index.js",
   "author": "Teekay",
   "scripts": {

@@ -1,9 +1,9 @@
 import { SlashCommandBuilder } from "discord.js";
-import { ICommand } from "../Command";
-import { getTokenData } from "../../modules/token/getTokenData";
-import { mintToken } from "../../modules/token/mintToken";
+import { ISlashCommand } from "../../Command";
+import { getTokenData } from "../../../modules/token/getTokenData";
+import { mintToken } from "../../../modules/token/mintToken";
 
-export const mintCommand: ICommand = {
+export const mintCommand: ISlashCommand = {
   data: new SlashCommandBuilder()
     .setName("mint")
     .setDescription("mint token")

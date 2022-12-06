@@ -1,9 +1,9 @@
 import { SlashCommandBuilder } from "discord.js";
-import { ICommand } from "../Command";
-import { getTokenData } from "../../modules/token/getTokenData";
-import { sendToken } from "../../modules/token/sendToken";
+import { ISlashCommand } from "../../Command";
+import { getTokenData } from "../../../modules/token/getTokenData";
+import { sendToken } from "../../../modules/token/sendToken";
 
-export const sendTokenCommand: ICommand = {
+export const sendTokenCommand: ISlashCommand = {
   data: new SlashCommandBuilder()
     .setName("send")
     .setDescription("send token")

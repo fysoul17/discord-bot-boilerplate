@@ -3,7 +3,9 @@ import { IntentOptions } from "./config/IntentOptions";
 import { dbConnection } from "./database/DBConnection";
 import { onInteraction } from "./events/onInteraction";
 import { onReady } from "./events/onReady";
-import { validateEnv } from "./utils/ValidateEnv";
+import { validateEnv } from "./utils/validateEnv";
+
+export let botClient: Client<boolean>;
 
 //https://discordjs.guide/
 (async () => {
@@ -11,15 +13,16 @@ import { validateEnv } from "./utils/ValidateEnv";
   if (!validateEnv()) return;
 
   // Init BOT client.
-  const client = new Client({ intents: IntentOptions });
+  botClient = new Client({ intents: IntentOptions });
+  if (!botClient) throw Error("Failed to create bot client");
 
   // Add events.
-  client.on("ready", async () => await onReady(client));
-  client.on("interactionCreate", async (interaction) => await onInteraction(interaction));
+  botClient.on("ready", async () => await onReady());
+  botClient.on("interactionCreate", async (interaction) => await onInteraction(interaction));
 
   // Connect DB.
   await dbConnection();
 
   // Login.
-  await client.login(process.env.BOT_TOKEN);
+  await botClient.login(process.env.BOT_TOKEN);
 })();
