@@ -13,6 +13,8 @@ export const buttonCommands: Record<string, IButtonCommand> = {
   [helloTokenCommand.id]: helloTokenCommand,
 };
 
+export const userCommandCache: { [key in string]: IButtonCommand[] } = {};
+
 export const onInteraction = async (interaction: Interaction) => {
   try {
     if (interaction.isCommand()) {
