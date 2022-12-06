@@ -1,4 +1,5 @@
 import { ButtonBuilder, ButtonStyle, EmbedBuilder } from "discord.js";
+import { IMG_HORIZONTAL_LINE } from "../../../attachments/attachments";
 import { actionRowButtonBuilder } from "../../../components/button";
 import { PRIMARY_COLOR } from "../../../utils/constant";
 import { IButtonCommand } from "../../Command";
@@ -11,11 +12,11 @@ export const helloTokenCommand: IButtonCommand = {
   execute: async (interaction) => {
     //cacheCommand(interaction.user.id, buildMenuCommand);
 
-    await interaction.reply({ embeds: [imageEmbed, textEmbed], ephemeral: true, components: [] });
+    await interaction.reply({ embeds: [imageEmbed, textEmbed], ephemeral: true, components: [], files: [IMG_HORIZONTAL_LINE] });
   },
 };
 
-const imageEmbed = new EmbedBuilder().setColor(PRIMARY_COLOR).setImage("attachment://horizontal.png");
+const imageEmbed = new EmbedBuilder().setColor(PRIMARY_COLOR).setImage("https://www.gstatic.com/webp/gallery3/2.png");
 const textEmbed = new EmbedBuilder()
   .setColor(0x00d7f4)
   .setDescription(
@@ -25,4 +26,5 @@ Hello Token
   )
   .setImage("attachment://horizontal.png");
 
+// NOTE: But this as components: []
 //const firstRow = actionRowButtonBuilder([tokenInfoCommand.builder]);
