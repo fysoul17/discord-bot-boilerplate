@@ -1,4 +1,4 @@
-import { Client } from "discord.js";
+import { Client, Events } from "discord.js";
 import { IntentOptions } from "./config/IntentOptions";
 import { dbConnection } from "./database/DBConnection";
 import { onInteraction } from "./events/onInteraction";
@@ -17,8 +17,8 @@ export let botClient: Client<boolean>;
   if (!botClient) throw Error("Failed to create bot client");
 
   // Add events.
-  botClient.on("ready", async () => await onReady());
-  botClient.on("interactionCreate", async (interaction) => await onInteraction(interaction));
+  botClient.on(Events.ClientReady, async () => await onReady());
+  botClient.on(Events.InteractionCreate, async (interaction) => await onInteraction(interaction));
 
   // Connect DB.
   await dbConnection();
