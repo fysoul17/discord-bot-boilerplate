@@ -26,8 +26,11 @@ BOT_TOKEN="Bot Token ID"
 MONGO_CLUSTER="mongodb+srv://<username>:<password>@(URL of MongoDB Cluster)"
 MONGO_USER="MongoDB Username"
 MONGO_PASSWORD="MongoDB Password"
+MONGO_DB_NAME="MongoDB DBName"
+
 APPLICATION_ID="Application ID of Discord Application"
 GUILD_ID="Channel ID that can be found in Discord Settings Tab. Developer setting must be on in your personal settings (Only for private bot)"
+
 DISCORD_CHANNEL_ID_MAIN="Channel ID that the bot will send a message (Only for sending message from bot)"
 ```
 - remove from .gitignore if it needs to be run on cloud
