@@ -18,7 +18,7 @@ export const userCommandCache: { [key in string]: IButtonCommand[] } = {};
 export const onInteraction = async (interaction: Interaction) => {
   try {
     if (interaction.isCommand()) {
-      await slashCommands[interaction.id].execute(interaction);
+      await slashCommands[interaction.commandName].execute(interaction);
     }
 
     if (interaction.isButton()) {
