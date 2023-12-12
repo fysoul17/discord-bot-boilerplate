@@ -48,8 +48,11 @@ DISCORD_CHANNEL_ID_MAIN="Channel ID that the bot will send a message (Only for s
 - Edit `cd_production.yml` for Continuous Deployment. Replace `PROJECT_ID` `CLOUD_RUN_NAME` `GCP_REGION`
 - Create `Repository` of Artifact Registry and name it as `CLOUD_RUN_NAME` value and select region that matches to `GCP_REGION` value.
 
+
 ### GCP with Compute Engine using Github Action (Option - Est. Minimum cost: $7~/Month)
 - ~~IMPORTANT: You MUST create `Cloud Storage` in order to use terraform setting and MUST match `bucket` and `prefix` at `main.tf`~~
+- IAM > Add roles for the  service account
+- ![image](https://github.com/fysoul17/discord-bot-boilerplate/assets/7436491/1cad982a-003c-412e-8010-6566751e481c)
 - Follow above `Cloud Run` settings to create credential file for `GCP_SERVICE_ACCOUNT` secret.
 - Follow above `Artifact Registry` setting.
 - Edit `cd_gcp_ce_terraform.yml` for Continuous Deployment. Replace variables.
